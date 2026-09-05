@@ -27,11 +27,26 @@ function resolveYtDlpExecutable() {
   const configured = process.env.YTDLP_PATH || process.env.YT_DLP_PATH;
   if (configured) return configured;
 
+  // Windows local path check
   const winCandidate = 'C:/Users/aa/AppData/Roaming/Python/Python314/Scripts/yt-dlp.exe';
   if (process.platform === 'win32' && fs.existsSync(winCandidate)) {
     return winCandidate;
   }
 
+  // Common Linux paths on Render/cloud hosting
+  const linuxCandidates = [
+    '/usr/local/bin/yt-dlp',
+    '/usr/bin/yt-dlp',
+    path.join(process.env.HOME || '', '.local', 'bin', 'yt-dlp')
+  ];
+
+  for (const candidate of linuxCandidates) {
+    if (fs.existsSync(candidate)) {
+      return candidate;
+    }
+  }
+
+  // Fallback to command name if installed via npm or global PATH
   return 'yt-dlp';
 }
 
