@@ -1,5 +1,7 @@
+const API_BASE_URL = import.meta.env.VITE_API_URL || '';
+
 export async function analyzeUrl(url, source = 'youtube') {
-  const response = await fetch('/api/analyze', {
+  const response = await fetch(`${API_BASE_URL}/api/analyze`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ url, source }),
@@ -15,7 +17,7 @@ export async function analyzeUrl(url, source = 'youtube') {
 }
 
 export async function requestDownload(jobId, formatId) {
-  const response = await fetch('/api/download', {
+  const response = await fetch(`${API_BASE_URL}/api/download`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ jobId, formatId }),
