@@ -282,14 +282,14 @@ async function createDownloadFile(jobId, format, sourceUrl) {
   const ytDlp = resolveYtDlpExecutable();
   const outputTemplate = filePath;
   const commonArgs = [
-    '--no-playlist',
-    '--restrict-filenames',
-    '--no-warnings',
-    '--extractor-args',
-    'youtube:player-client=android,web',
-    '--output',
-    outputTemplate,
-  ];
+  '--no-playlist',
+  '--restrict-filenames',
+  '--no-warnings',
+  '--extractor-args',
+  'youtube:player-client=ios,web',
+  '--output',
+  outputTemplate,
+];
 
   const formatArgs = format.id === 'mp3'
     ? ffmpegPath
